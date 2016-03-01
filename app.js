@@ -57,6 +57,14 @@ router.route('/movies')
   });
 
 
+router.route('/movies/:movie_id')
+ .get(function(req, res) {
+    db.movie.findById(req.params.movie_id)
+    .then( function(movie){
+      res.json({ movie: movie }) 
+    })
+  });
+
 router.get('/', function(req,res){
   res.json({ message: 'hooray! welcome to our api!' });   
 });

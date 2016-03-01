@@ -8,6 +8,8 @@ var express = require('express'),
 
 var http = require('http').createServer(app);
 
+var router = express.Router(); 
+
 app.use(express.static(__dirname + '/public'));
 
 app.set('view engine', 'ejs');
@@ -23,49 +25,44 @@ app.use(function (req, res, next) {
 });
 
 
-app.get('/', function(req,res){
-  db.movie.findAll()
-  .then(function(movies){
-    res.render('index', {
-      movies: movies,
-      message: ''    
-    })
+
+
+app.use('/api', router);
+
+router.use(function(req, res, next) {
+  // do logging
+  console.log('Something is happening.');
+  next(); // make sure we go to the next routes and don't stop here
+});
+
+
+router.route('/movies')
+  // create a movie (accessed at POST http://localhost:4000/api/movies)
+  .post(function(req,res){
+    db.movie.createNewMovie(req.body.title, req.body.review,req.body.image, req.body.rating,
+      function(err){
+        console.log('NOO');
+      },
+      function(success){
+        res.redirect('/');
+      }
+    );
   })
-});
 
-app.post('/create', function(req,res){
-  db.movie.createNewMovie(req.body.title, req.body.review,req.body.image, req.body.rating,
-    function(err){
-      console.log('NOO');
-    },
-    function(success){
-      res.redirect('/');
-    }
-  );
-
-});
-
-app.get('/search', function (req, res) {
-  db.movie.findAll({
-    where: {
-      title: { $iLike: '%' + req.query.searchterm + '%' }
-    }
-  }).then(function(movie){
-    if(!movie[0]){
-      req.flash('info', "Sorry, there's no review for " + req.query.searchterm + ", yet.");
-      res.redirect('/');
-    } else {
-      req.flash('info', "🎉 I have a review for "+ movie[0].dataValues.title + "! Check below to read it.");
-      res.redirect('/');
-    }
-
+ .get(function(req, res) {
+    db.movie.findAll()
+    .then( function(movies){
+      res.json({ movies: movies }) 
+    })
   });
 
+
+router.get('/', function(req,res){
+  res.json({ message: 'hooray! welcome to our api!' });   
 });
 
-app.get('/*', function (req, res) {
-  res.render('404');
-});
+
+
 
 
 http.listen(process.env.PORT || 4000, function(){

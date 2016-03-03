@@ -10,13 +10,13 @@
       <li class="review-tile mar-bottom">
         
           <h2 class="review-title">   
-            <a href="#" class="review-target" data-movie="movie_<%= i %>">
+            <a href="#" class="review-target" data-movie="movie_<%= movies[i].id %>">
               <%= movies[i].title %> <br>
               <span>&blacktriangledown;</span>
             </a>
           </h2>
 
-          <p class="review-text mar-y" data-text="movie_<%= i %>">
+          <p class="review-text mar-y" data-text="movie_<%= movies[i].id %>">
             <%= movies[i].review %>
           </p>
           

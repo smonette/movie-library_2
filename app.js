@@ -8,7 +8,7 @@ var express = require('express'),
 
 var http = require('http').createServer(app);
 
-var router = express.Router(); 
+var request = require('request');
 
 app.use(express.static(__dirname + '/public'));
 
@@ -27,46 +27,62 @@ app.use(function (req, res, next) {
 
 
 
-app.use('/api', router);
 
-router.use(function(req, res, next) {
-  // do logging
-  console.log('Something is happening.');
-  next(); // make sure we go to the next routes and don't stop here
+// create a movie
+app.post('/rest-api/movies', function(req,res){
+  var title = req.body.title;
+  var review = req.body.review;
+  var image = req.body.image;
+  var rating = req.body.rating;
+
+  db.movie.createNewMovie(title, review, image, rating,
+    function(err){
+      console.log('NOO');
+    },
+    function(success){
+      res.redirect('/');
+    }
+  );
+})
+
+// Show all movies in JSON (accessed at http://localhost:4000/rest-api/movies)
+app.get('/rest-api/movies', function(req, res) {
+  db.movie.findAll()
+  .then( function(movies){
+    res.json({ movies: movies }) 
+  })
+});
+
+// Show all movies in JSON (accessed at http://localhost:4000/rest-api/movies/:movie_id)
+app.get('/rest-api/movies/:movie_id', function(req, res) {
+  db.movie.findById(req.params.movie_id)
+  .then( function(movie){
+    res.json({ movie: movie }) 
+  })
 });
 
 
-router.route('/movies')
-  // create a movie (accessed at POST http://localhost:4000/api/movies)
-  .post(function(req,res){
-    db.movie.createNewMovie(req.body.title, req.body.review,req.body.image, req.body.rating,
-      function(err){
-        console.log('NOO');
-      },
-      function(success){
-        res.redirect('/');
-      }
-    );
-  })
 
- .get(function(req, res) {
-    db.movie.findAll()
-    .then( function(movies){
-      res.json({ movies: movies }) 
-    })
+
+var getMovies = function(requestUrl, callback) {
+  var allMovies;
+  request(requestUrl, function(error, response, body){
+    if (!error && response.statusCode == 200) {
+      allMovies = JSON.parse(body).movies;
+      callback(allMovies);
+    }
   });
+}
 
+// BUILD THE VIEWS
+app.get('/', function(req,res){
+// res.render("index");
+  var apiUrl = "http://localhost:4000/rest-api/movies/";
 
-router.route('/movies/:movie_id')
- .get(function(req, res) {
-    db.movie.findById(req.params.movie_id)
-    .then( function(movie){
-      res.json({ movie: movie }) 
-    })
-  });
-
-router.get('/', function(req,res){
-  res.json({ message: 'hooray! welcome to our api!' });   
+  getMovies(apiUrl, function(allMovies){
+    res.render("index", { movies: allMovies });
+    console.log(allMovies);
+  });// get movies
 });
 
 

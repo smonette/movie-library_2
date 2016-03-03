@@ -34,7 +34,7 @@ module.exports = function (sequelize, DataTypes){
         }).error(function(error) {
           console.log(error);
         }).then(function(movie) {
-          res.json({ message: 'Movie created!' });
+          console.log('Movie created!');
         });
       }// close createNewMovie
 

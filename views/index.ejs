@@ -16,11 +16,107 @@
 
   <main>
 
-    <% include partials/_search.ejs %>
-    <% include partials/_reviews.ejs %>
+    <div class="search-container">   
+      <div class="row">  
+        <form action="/search"  method="get" class="search-form">
+          <div class="form-row"> 
+            <span class="form-label">Find a Movie</span>
+            <input type="text" name="searchterm" placeholder="Search" class="form-input mar-bottom search-input" required>
+            <input type="submit" value="Search" class="form-submit search-submit">
+          </div>
+          <div class="search-message"><%- messages() %></div>
+        </form>
+      </div>   
+    </div>
+
+    <div class="row">
+      <ul class="review-grid">
+        <li class="add-review-tile mar-bottom">
+          <a href="#" id="overlay-init">
+            <span class="add-review_icon">+</span><br>
+            <span class="add-review_cta">Add a review</span>
+          </a>
+
+        </li>
+        <% for(i=0; i < movies.length; i++) { %>
+          <li class="review-tile mar-bottom">
+            
+              <h2 class="review-title">   
+                <a href="#" class="review-target" data-movie="movie_<%= movies[i].id %>">
+                  <%= movies[i].title %> <br>
+                  <span>&blacktriangledown;</span>
+                </a>
+              </h2>
+
+              <p class="review-text mar-y" data-text="movie_<%= movies[i].id %>">
+                <%= movies[i].review %>
+              </p>
+              
+              <div class="review-thumbnail mar-y">        
+                <% if (movies[i].image){ %>
+                  <img src="<%= movies[i].image %>" alt="<%= movies[i].title %>" class="review-image">
+                <% } else { %>
+                  <img src="http://placehold.it/200x300?text=no+image" alt="No poster found" class="review-image">
+                <% } %>
+              </div>
+
+              <div class="review-rating">     
+                <p>My Rating:</h3>
+                <% if (movies[i].rating == 0){ %>
+                  ⭐</p>
+                <% } else if (movies[i].rating == 1){ %>
+                  ⭐⭐</p>
+                <% } else if (movies[i].rating == 2){ %>
+                  ⭐⭐⭐</p>
+                <% } else { %>
+                  ⭐⭐⭐⭐</p>
+                <% } %>
+              </div>
+          </li>
+        <% } %>
+      </ul>
+    </div>
+
   </main>
   
-  <% include partials/_overlay.ejs %>
+  <div class="overlay">
+    <div class="row"> 
+      <div class="overlay-container">
+        <a href="#" class="overlay-dismiss" id="overlay-dismiss">&times;</a>
+
+        <form action="/rest-api/movies" method="POST" class="movie-form">
+          <div class="form-row">
+            <span class="form-label">Movie Title</span>
+            <input class="form-input add-input" type="text" placeholder="Movie Title" name="title" required>
+          </div>
+          
+          <div class="form-row">
+            <span class="form-label">My Review</span>
+            <textarea class="form-input add-input" placeholder="My Review" name="review" rows="3" required></textarea>
+          </div>
+
+          <div class="form-row">
+            <span class="form-label">Poster URL</span>
+            <input class="form-input add-input" type="url" placeholder="Image URL" name="image"> 
+          </div>
+
+          <div class="form-row">
+            <span class="form-label">My Rating</span>
+            <input type="radio" name="rating" value="0" checked><span class="form-label_radio">⭐</span><br>
+            <input type="radio" name="rating" value="1"><span class="form-label_radio">⭐⭐</span><br>
+            <input type="radio" name="rating" value="2"><span class="form-label_radio">⭐⭐⭐</span><br> 
+            <input type="radio" name="rating" value="3"><span class="form-label_radio">⭐⭐⭐⭐</span><br>
+          </div>
+
+          <div class="form-row">
+            <input class="form-submit add-submit" type="submit">
+          </div>
+        </form>
+      </div>
+
+    </div>
+  </div>
+
 
   <footer class="mar-y type-centered">
     <div class="row">

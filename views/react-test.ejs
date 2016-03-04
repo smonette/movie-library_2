@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>My Movie Reviews</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="/../styles/style.css">
+    <script src="/../js/jquery-2.2.0.min.js"></script>
+    <script src="/../js/scripts.js"></script>
+
+    <script src="https://fb.me/react-0.14.7.js"></script>
+    <script src="https://fb.me/react-dom-0.14.7.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
+    
+  </head>
+  <body>
+  <script type="text/babel">
+
+    var MovieReview = React.createClass({
+      render: function() {
+        return (
+          <li className="review-tile mar-bottom">
+            <h2>{this.props.movie.title}</h2>
+            {this.props.movie.rating}
+          </li>
+        );
+      }
+    });
+
+    var MovieGrid = React.createClass({
+      render: function() {
+        var tiles = [];
+        this.props.movies.forEach(function(movie) {
+          tiles.push(<MovieReview movie={movie} key={movie.title} />);
+        });
+        return (
+          <ul className="review-grid">
+            {tiles}
+          </ul>
+        );
+      }
+    });
+
+    var MOVIES = [
+      {title: 'Mad Max', rating: '5'},
+      {title: 'Star Wars', rating: '5'},
+      {title: 'Jurassic World', rating: '3' },
+      {title: 'San Andreas', rating: '3'}
+    ];
+     
+    ReactDOM.render(
+      <MovieGrid movies={MOVIES} />,
+      document.getElementById('review-grid-container')
+    );
+
+
+  </script>
+
+
+
+
+    <div class="row" id="review-grid-container">
+    
+    </div>
+
+
+
+
+  </body>
+</html>

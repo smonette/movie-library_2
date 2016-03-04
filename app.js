@@ -3,7 +3,6 @@ var express = require('express'),
     bodyParser = require('body-parser'),
     session = require('express-session'),
     cookieParser = require('cookie-parser'),
-    flash = require('connect-flash'),
     app = express();
 
 var http = require('http').createServer(app);

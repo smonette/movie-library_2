@@ -3,67 +3,80 @@
   <head>
     <title>My Movie Reviews</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+
     <link rel="stylesheet" type="text/css" href="/../styles/style.css">
     <script src="/../js/jquery-2.2.0.min.js"></script>
-    <script src="/../js/scripts.js"></script>
 
+    <!-- REACT  -->
+    <!-- Libraries -->
     <script src="https://fb.me/react-0.14.7.js"></script>
     <script src="https://fb.me/react-dom-0.14.7.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
-    
+    <!-- My React code -->
+<!--     <script type="text/babel" src="/../js/react-reviews.js"></script>
+ -->    <script type="text/babel" src="/../js/react-search.js"></script>
   </head>
+  
   <body>
-  <script type="text/babel">
+    <header>
+      <h1 class="header-title">My Movie Reviews</h1>
+    </header>
 
-    var MovieReview = React.createClass({
-      render: function() {
-        return (
-          <li className="review-tile mar-bottom">
-            <h2>{this.props.movie.title}</h2>
-            {this.props.movie.rating}
-          </li>
-        );
-      }
-    });
+  <main>
 
-    var MovieGrid = React.createClass({
-      render: function() {
-        var tiles = [];
-        this.props.movies.forEach(function(movie) {
-          tiles.push(<MovieReview movie={movie} key={movie.title} />);
-        });
-        return (
-          <ul className="review-grid">
-            {tiles}
-          </ul>
-        );
-      }
-    });
+    <ul class="row" id="review-grid-container"></ul>
 
-    var MOVIES = [
-      {title: 'Mad Max', rating: '5'},
-      {title: 'Star Wars', rating: '5'},
-      {title: 'Jurassic World', rating: '3' },
-      {title: 'San Andreas', rating: '3'}
-    ];
-     
-    ReactDOM.render(
-      <MovieGrid movies={MOVIES} />,
-      document.getElementById('review-grid-container')
-    );
+     <div class="row" id="review-container"></div>
 
+  </main>
+  
+  <div class="overlay">
+    <div class="row"> 
+      <div class="overlay-container">
+        <a href="#" class="overlay-dismiss" id="overlay-dismiss">&times;</a>
 
-  </script>
+        <form action="/rest-api/movies" method="POST" class="movie-form">
+          <div class="form-row">
+            <span class="form-label">Movie Title</span>
+            <input class="form-input add-input" type="text" placeholder="Movie Title" name="title" required>
+          </div>
+          
+          <div class="form-row">
+            <span class="form-label">My Review</span>
+            <textarea class="form-input add-input" placeholder="My Review" name="review" rows="3" required></textarea>
+          </div>
 
+          <div class="form-row">
+            <span class="form-label">Poster URL</span>
+            <input class="form-input add-input" type="url" placeholder="Image URL" name="image"> 
+          </div>
 
+          <div class="form-row">
+            <span class="form-label">My Rating</span>
+            <input type="radio" name="rating" value="0" checked><span class="form-label_radio">⭐</span><br>
+            <input type="radio" name="rating" value="1"><span class="form-label_radio">⭐⭐</span><br>
+            <input type="radio" name="rating" value="2"><span class="form-label_radio">⭐⭐⭐</span><br> 
+            <input type="radio" name="rating" value="3"><span class="form-label_radio">⭐⭐⭐⭐</span><br>
+          </div>
 
+          <div class="form-row">
+            <input class="form-submit add-submit" type="submit">
+          </div>
+        </form>
+      </div>
 
-    <div class="row" id="review-grid-container">
-    
     </div>
+  </div>
 
 
+  <footer class="mar-y type-centered">
+    <div class="row">
+      Built by Steph Monette in 2016
+      <span class="footer-divider"> 💖 </span>
+      Check the source code on <a href="https://github.com/smonette/movie-library">GitHub</a>.
+    </div>
+  </footer>
 
-
-  </body>
+</body>
+<script src="/../js/scripts.js"></script>
 </html>

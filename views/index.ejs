@@ -3,83 +3,30 @@
   <head>
     <title>My Movie Reviews</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+
     <link rel="stylesheet" type="text/css" href="/../styles/style.css">
     <script src="/../js/jquery-2.2.0.min.js"></script>
-    <script src="/../js/scripts.js"></script>
 
+    <!-- REACT  -->
+    <!-- Libraries -->
     <script src="https://fb.me/react-0.14.7.js"></script>
     <script src="https://fb.me/react-dom-0.14.7.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
-    
+    <!-- My React code -->
+<!--     <script type="text/babel" src="/../js/react-reviews.js"></script>
+ -->    <script type="text/babel" src="/../js/react-search.js"></script>
   </head>
-	
-	<body>
-	  <header>
-	    <h1 class="header-title">My Movie Reviews</h1>
-	  </header>
+  
+  <body>
+    <header>
+      <h1 class="header-title">My Movie Reviews</h1>
+    </header>
 
   <main>
 
-    <div class="search-container">   
-      <div class="row">  
-        <form action="/search"  method="get" class="search-form">
-          <div class="form-row"> 
-            <span class="form-label">Find a Movie</span>
-            <input type="text" name="searchterm" placeholder="Search" class="form-input mar-bottom search-input" required>
-            <input type="submit" value="Search" class="form-submit search-submit">
-          </div>
-          <div class="search-message"><%- messages() %></div>
-        </form>
-      </div>   
-    </div>
+    <ul class="row" id="review-grid-container"></ul>
 
-    <div class="row">
-      <ul class="review-grid">
-        <li class="add-review-tile mar-bottom">
-          <a href="#" id="overlay-init">
-            <span class="add-review_icon">+</span><br>
-            <span class="add-review_cta">Add a review</span>
-          </a>
-
-        </li>
-        <% for(i=0; i < movies.length; i++) { %>
-          <li class="review-tile mar-bottom">
-            
-              <h2 class="review-title">   
-                <a href="#" class="review-target" data-movie="movie_<%= movies[i].id %>">
-                  <%= movies[i].title %> <br>
-                  <span>&blacktriangledown;</span>
-                </a>
-              </h2>
-
-              <p class="review-text mar-y" data-text="movie_<%= movies[i].id %>">
-                <%= movies[i].review %>
-              </p>
-              
-              <div class="review-thumbnail mar-y">        
-                <% if (movies[i].image){ %>
-                  <img src="<%= movies[i].image %>" alt="<%= movies[i].title %>" class="review-image">
-                <% } else { %>
-                  <img src="http://placehold.it/200x300?text=no+image" alt="No poster found" class="review-image">
-                <% } %>
-              </div>
-
-              <div class="review-rating">     
-                <p>My Rating:</h3>
-                <% if (movies[i].rating == 0){ %>
-                  ⭐</p>
-                <% } else if (movies[i].rating == 1){ %>
-                  ⭐⭐</p>
-                <% } else if (movies[i].rating == 2){ %>
-                  ⭐⭐⭐</p>
-                <% } else { %>
-                  ⭐⭐⭐⭐</p>
-                <% } %>
-              </div>
-          </li>
-        <% } %>
-      </ul>
-    </div>
+     <div class="row" id="review-container"></div>
 
   </main>
   
@@ -131,4 +78,5 @@
   </footer>
 
 </body>
+<script src="/../js/scripts.js"></script>
 </html>

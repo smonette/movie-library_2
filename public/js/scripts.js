@@ -1,7 +1,7 @@
 $(document).ready(function() {
   
   $('.review-target').on("click", function(e){
-    // e.preventDefault();
+    e.preventDefault();
     // var movie = $(this).attr('data-movie');
 
     // var review = $('.review-tile').find("[data-text='" + movie + "']");

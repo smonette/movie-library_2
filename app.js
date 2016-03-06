@@ -75,19 +75,9 @@ var getMovies = function(requestUrl, callback) {
 
 // BUILD THE VIEWS
 app.get('/', function(req,res){
-  var apiUrl = "http://localhost:4000/rest-api/movies/";
+  res.render("index");
 
-  getMovies(apiUrl, function(allMovies){
-    res.render("index", { movies: allMovies });
-    console.log(allMovies);
-  });// get movies
-});
-
-
-app.get('/react', function(req,res){
-    res.render("react-test");
-});
-
+}); 
 
 
 

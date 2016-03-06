@@ -1,8 +1,6 @@
 var express = require('express'),
     db = require('./models/index.js'),
     bodyParser = require('body-parser'),
-    session = require('express-session'),
-    cookieParser = require('cookie-parser'),
     app = express();
 
 var http = require('http').createServer(app);
@@ -13,17 +11,6 @@ app.use(express.static(__dirname + '/public'));
 
 app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({extended: true}) );
-
-app.use(cookieParser('secret'));
-app.use(session({cookie: { maxAge: 60000 }}));
-
-app.use(require('connect-flash')());
-app.use(function (req, res, next) {
-  res.locals.messages = require('express-messages')(req, res);
-  next();
-});
-
-
 
 
 

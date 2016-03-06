@@ -41,13 +41,16 @@ var SearchMovies = React.createClass({
     }
 
     return <div className="row">
-              <input type="text" value={this.state.searchString} onChange={this.handleChange} placeholder="Type here" />
-              <ul> 
+              <input type="text" value={this.state.searchString} onChange={this.handleChange} placeholder="Find a movie!" className="form-input mar-y"/>
+              <ul className="review-grid"> 
 
                   { movies.map(function(movie){
                       return <li className="review-tile mar-bottom">
                                 <h2><a href="#" className="review-target">{movie.title}</a></h2>
                                 <p className="review-text mar-y">My review: {movie.review}</p>
+                                <div className="review-thumbnail mar-y"> 
+                                  <img className="review-image" src={movie.image} alt={movie.title} />
+                                </div>
                                 <p>My rating is: {movie.rating}</p>
                               </li>
                   }) }

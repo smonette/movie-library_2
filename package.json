@@ -9,22 +9,18 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/smonette/movie-library.git"
+    "url": "https://github.com/smonette/movie-library_2.git"
   },
   "author": "Steph Monette",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/smonette/movie-library/issues"
+    "url": "https://github.com/smonette/movie-library_2/issues"
   },
   "homepage": "https://github.com/smonette/movie-library",
   "dependencies": {
     "body-parser": "^1.15.0",
-    "connect-flash": "^0.1.1",
-    "cookie-parser": "^1.4.1",
     "ejs": "^2.4.1",
     "express": "^4.13.4",
-    "express-messages": "^1.0.0",
-    "express-session": "^1.13.0",
     "grunt": "^0.4.5",
     "grunt-cli": "^0.1.13",
     "grunt-contrib-watch": "^0.6.1",

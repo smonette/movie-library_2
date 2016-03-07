@@ -7,10 +7,6 @@ module.exports = function(grunt) {
       sass: {
         files: ['sass/**'],
         tasks: ['sass']
-      },
-      browserify: {
-        files: ['react/**'],
-        tasks: ['browserify']
       }
     },
 
@@ -29,18 +25,10 @@ module.exports = function(grunt) {
           ext: '.css'
         }]
       }
-    },
-    browserify: {
-      dist: {
-        files: {
-          'public/js/bundle.js': ['react/*.js']
-        }
-      }
     }
   });
 
-  grunt.registerTask("compile", ['sass', 'browserify']);
-  grunt.loadNpmTasks('grunt-browserify');
+  grunt.registerTask("compile", ['sass']);
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-sass');
 };

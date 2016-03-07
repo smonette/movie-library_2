@@ -1,25 +1,27 @@
-# My Movie Library
-
-This is a simple Node.js app that stores reviews and ratings of movies you've seen. You can view a demo [here](http://stephs-movie-library.herokuapp.com/).
+# My Movie Library: Take 2
 
 # Table of Contents
 * [Goals](#goals)
 * [Tech Overview](#tech-overview)
 * [Getting Started](#getting-started)
 * [Next Steps](#next-steps)
+* [Learnings](#learnings)
 * [Helpful Links](#helpful-links)
 
 
 ## Goals
-* Display a list of movies 
-  * Show a thumbnail/image for each movie
-  * Display ratings for each movie
+* Store movie ratings in a database
+* Create a route for a JSON API
+* Use React to:
+	* Display a list of movie titles 
+  	* Show a thumbnail/image for each movie
+  	* Display ratings for each movie
 * Clicking a title will reveal a review for each movie
 * Include a search bar/filter to look up movies on list 
 
 
 ## Tech Overview
-This is built on Node.js, with a Postgres database to store your movies. The Sass is compiled with Grunt.
+This is built on Node.js, with a Postgres database to store your movies. The Sass is compiled with Grunt. The API and search are being powered by React.
 
 
 ## Getting Started
@@ -28,7 +30,7 @@ As this project is built on Node.js with a Postgres database so the very first t
 
 You can download Postgres [here](http://www.postgresql.org/download/), and I'd also recommend [PG Commander](https://eggerapps.at/pgcommander/) if you're on a Mac and want a GUI to check your data.
 
-Once you're all setup with Node and Postgres, clone this repo to your machine. I do this from Terminal, navigating to the directory I want to work from and typing `git clone https://github.com/smonette/movie-library.git` After that, navigate into the repo: `cd movie-library`
+Once you're all setup with Node and Postgres, clone this repo to your machine. I do this from Terminal, navigating to the directory I want to work from and typing `git clone https://github.com/smonette/movie-library_2.git` After that, navigate into the repo: `cd movie-library_2`
 
 ### Setting up Node
 Good news: Most Node setup is left in the hands of `package.json`. This file lists all the project's dependencies so you can run `npm install` to install them all at once! Confirm that there are no errors with package installs.
@@ -55,18 +57,21 @@ To view this project, start by opening a new tab in command line, and entering `
 ## Next Steps
 As I worked on this I came across some issues that need to be solved in the future:
 
-### Search
-* Search yields no results when there's a space, so `Dead Pool` won't find `Deadpool`
-* If there are two movies containing a word, only the first movie is displaying
-* Make the interaction more obvious to the user that a film is present on the list.
-
 ### Mobile/Tablet
 * The "add movie" form is too tall on mobile and the submit button is hidden
 * Mobile iOS needs more form styling.
 
+### React/Front-end
+* Add back the logic to safeguard if there is no image.
+* Display stars in a prettier way
+* Refactor files, and use a bundler.
+
+## Learnings
+This was my first app using React, and I have to admit that it took a while to wrap my head around the JSX syntax. It looks so much like HTML, that I encountered a lot of a small bugs (`class=` vs 'className='). By the end of this, I started to wrap my head around how this worked, and how to use `propTypes` and events to their power. 
 
 
 ## Helpful Links
+* [React](http://facebook.github.io/react/docs/getting-started.html)
 * [Node.js](https://nodejs.org/en/)
 * [Express](http://expressjs.com/)
 * [EJS](http://www.embeddedjs.com/)

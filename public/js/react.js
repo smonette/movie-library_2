@@ -31,12 +31,6 @@ var MoviesGrid = React.createClass({
     this.setState( { overlayState: !currentState.overlayState } )
   },
 
-  handleTitleClick: function(){
-    console.log('clicked a title!');
-    var currentReviewState = {...this.state };
-    this.setState( { showReview: !currentReviewState.showReview } )
-  },
-
   render: function() {
     var movies = this.props.items,
       searchString = this.state.searchString.trim().toLowerCase();
@@ -50,8 +44,7 @@ var MoviesGrid = React.createClass({
                 image={movie.image}
                 id={movie.id}
                 review={movie.review}  
-                rating={movie.rating}
-                showReview={this.state.showReview} />
+                rating={movie.rating} />
     }, this);
 
     if(searchString.length > 0){
@@ -91,18 +84,23 @@ var MovieTile = React.createClass({
     id: React.PropTypes.number,
     review: React.PropTypes.string,
     rating: React.PropTypes.number,
-    showReview: React.PropTypes.bool,
     onClick: React.PropTypes.func
   },
+  getInitialState: function(){
+    return { 
+      showReview: false
+    }
+  },
+
   render() {    
     var reviewText = null;
-    if(this.props.showReview){
+    if(this.state.showReview){
       reviewText = <p className="review-text mar-y">My review: {this.props.review}</p>
     }
 
     return (
       <li className="review-tile mar-bottom">
-        <h2 onClick={this.props.onClick}>{this.props.title}</h2>
+        <h2 onClick={this.handleTitleClick}>{this.props.title}</h2>
           {reviewText}
           <div className="review-thumbnail mar-y"> 
             <img className="review-image" src={this.props.image} alt={this.props.title} />
@@ -110,7 +108,14 @@ var MovieTile = React.createClass({
         <p>Rating: {this.props.rating}⭐</p>
       </li>
     );
+  },
+
+  handleTitleClick: function(){
+    console.log('clicked a title!');
+    var currentReviewState = {...this.state };
+    this.setState( { showReview: !currentReviewState.showReview } )
   }
+
 });
 
 var MovieAddItem = React.createClass({

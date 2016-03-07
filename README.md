@@ -40,10 +40,7 @@ Sequelize is a Javascript ORM that makes it easier to interact with our database
 - `createdb movie_library` to create the database
 - `sqlize db:migrate` to add the table and columns
 
-Now your machine is set up with a database! But, let's add some data before we get going.
-- Open up the file called `insert.sql`. This contains some sample content.
-- In your terminal type in `psql`. This will access your database.
-- Paste in the values into your terminal, and hit enter. This will add three movies into your `movies` table.
+Now your machine is set up with a database!
 
 ### Compiling the styles
 To compile the Sass run `grunt compile` in your command line. Then `grunt watch` to tell Grunt to automatically recompile anytime you change your Sass files.

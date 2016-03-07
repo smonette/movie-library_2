@@ -7,13 +7,6 @@
   &:after {
     content: '\201D';
   }
-
-  // hide & show
-  display: none;
-
-  &.show { 
-    display: block; 
-  }
 }
 
 .review-title {

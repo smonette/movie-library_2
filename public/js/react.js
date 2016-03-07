@@ -13,9 +13,7 @@ var MoviesGrid = React.createClass({
  getInitialState: function(){
     return { 
       searchString: '', 
-      overlayState: false,
-      showReview: false
-
+      overlayState: false
     }
   },
 
@@ -36,7 +34,7 @@ var MoviesGrid = React.createClass({
   handleTitleClick: function(){
     console.log('clicked a title!');
     var currentReviewState = {...this.state };
-    this.setState( { showReview : !currentReviewState.showReview } )
+    this.setState( { showReview: !currentReviewState.showReview } )
   },
 
   render: function() {
@@ -46,6 +44,7 @@ var MoviesGrid = React.createClass({
 
     var moviesToDisplay = movies.map(function(movie){
       return <MovieTile 
+                key={movie.id}
                 onClick={this.handleTitleClick} 
                 title={movie.title} 
                 image={movie.image}
@@ -53,7 +52,7 @@ var MoviesGrid = React.createClass({
                 review={movie.review}  
                 rating={movie.rating}
                 showReview={this.state.showReview} />
-    });
+    }, this);
 
     if(searchString.length > 0){
       // We are searching. Filter the results.
@@ -95,20 +94,20 @@ var MovieTile = React.createClass({
     showReview: React.PropTypes.bool,
     onClick: React.PropTypes.func
   },
-  render() {
+  render() {    
     var reviewText = null;
     if(this.props.showReview){
-      reviewText = <p className="review-text mar-y">My review: {review}</p>
+      reviewText = <p className="review-text mar-y">My review: {this.props.review}</p>
     }
 
     return (
-      <li className="review-tile mar-bottom" key={id}>
-        <h2 onClick={this.props.onClick}>{title}</h2>
+      <li className="review-tile mar-bottom">
+        <h2 onClick={this.props.onClick}>{this.props.title}</h2>
           {reviewText}
           <div className="review-thumbnail mar-y"> 
-            <img className="review-image" src={image} alt={title} />
+            <img className="review-image" src={this.props.image} alt={this.props.title} />
           </div>
-        <p>Rating: {rating}⭐</p>
+        <p>Rating: {this.props.rating}⭐</p>
       </li>
     );
   }

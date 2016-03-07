@@ -40,7 +40,10 @@ Sequelize is a Javascript ORM that makes it easier to interact with our database
 - `createdb movie_library` to create the database
 - `sqlize db:migrate` to add the table and columns
 
-Now your machine is set up with a database!
+Now your machine is set up with a database! But, let's add some data before we get going.
+- Open up the file called `insert.sql`. This contains some sample content.
+- In your terminal type in `psql`. This will access your database.
+- Paste in the values into your terminal, and hit enter. This will add three movies into your `movies` table.
 
 ### Compiling the styles
 To compile the Sass run `grunt compile` in your command line. Then `grunt watch` to tell Grunt to automatically recompile anytime you change your Sass files.
@@ -64,10 +67,10 @@ As I worked on this I came across some issues that need to be solved in the futu
 ### React/Front-end
 * Add back the logic to safeguard if there is no image.
 * Display stars in a prettier way
-* Refactor files, and use a bundler.
+* Refactor React files, and use a bundler.
 
 ## Learnings
-This was my first app using React, and I have to admit that it took a while to wrap my head around the JSX syntax. It looks so much like HTML, that I encountered a lot of a small bugs (`class=` vs 'className='). By the end of this, I started to wrap my head around how this worked, and how to use `propTypes` and events to their power. 
+This was my first app using React, and I have to admit that it took a while to wrap my head around the JSX syntax. It looks so much like HTML, that I encountered a lot of a small bugs (`class=` vs `className=`), forgetting that it was a functions, not markup. By the end of this, I started to wrap my head around how this worked, and how to use `propTypes` and events to their power. 
 
 
 ## Helpful Links

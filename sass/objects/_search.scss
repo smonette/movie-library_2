@@ -1,20 +1,11 @@
 .search-container {
-  background: darken($light, 5%);
-  border-bottom: 2px solid darken($light, 10%);
-
-  padding-top:40px;
+  text-align: center;
   padding-bottom: 40px;
-  margin-bottom: 40px;
 }
-.search-form {
+.search-input {
   margin-right: auto;
   margin-left: auto;
   @media ($tablet-up) {
     width: 50%;
   }
-}
-
-.search-message {
-  @extend .type-xl;
-  text-align: center;
 }

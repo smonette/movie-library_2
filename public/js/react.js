@@ -18,7 +18,7 @@ var MoviesGrid = React.createClass({
   },
 
   handleChange: function(e){
-    this.setState({searchString:e.target.value})
+    this.setState({searchString:e.target.value});
   },
 
   handleClick: function() {
@@ -35,7 +35,13 @@ var MoviesGrid = React.createClass({
     var movies = this.props.items,
       searchString = this.state.searchString.trim().toLowerCase();
 
-
+    if(searchString.length > 0){
+      // We are searching. Filter the results.
+      movies = movies.filter(function(movie){
+        return movie.title.toLowerCase().match( searchString );
+      });
+    }
+    
     var moviesToDisplay = movies.map(function(movie){
       return <MovieTile 
                 key={movie.id}
@@ -47,33 +53,18 @@ var MoviesGrid = React.createClass({
                 rating={movie.rating} />
     }, this);
 
-    if(searchString.length > 0){
-      // We are searching. Filter the results.
-      movies = movies.filter(function(movie){
-        return movie.title.toLowerCase().match( searchString )
-      });
-    }
-    
-    var overlay = null; 
-
-    // if the overlayState is active, show the overlay
-    if(this.state.overlayState) { 
-      overlay = <Overlay onClick={this.handleClick} /> 
-    }
-    
     return (
-      <main>
-        <div className="row mar-y">
-          <input type="text" value={this.state.searchString} onChange={this.handleChange} placeholder="Type here" className="form-input add-input"/>
+      <div className="grid">
+        <div className="row mar-y search-container">
+          <span className="form-label">Find a movie:</span>
+          <input type="text" value={this.state.searchString} onChange={this.handleChange} placeholder="Find a review" className="form-input search-input"/>
         </div>
         <div className="row">
           <ul className="review-grid"> 
             {moviesToDisplay}
-            <MovieAddItem onClick={this.handleClick} />
           </ul>
         </div>
-        {overlay}
-      </main>
+      </div>
     )}
 });
 
@@ -116,65 +107,6 @@ var MovieTile = React.createClass({
     this.setState( { showReview: !currentReviewState.showReview } )
   }
 
-});
-
-var MovieAddItem = React.createClass({
-  propTypes: {
-    onClick: React.PropTypes.func
-  },
-  render() {
-    return (
-      <li className="add-review-tile mar-bottom type-centered" onClick={this.props.onClick}>
-        <h2><a>Add Review!</a></h2>
-      </li>
-    );
-  }
-});
-
-var Overlay = React.createClass({
-  propTypes: {
-    onClick: React.PropTypes.func
-  },
-  render() {
-    return (
-        <div className="overlay" id="overlay">
-          <div className="row"> 
-            <div className="overlay-container">
-              <a href="#" className="overlay-dismiss" onClick={this.props.onClick}>&times;</a>
-
-              <form action="/rest-api/movies" method="POST" className="movie-form">
-                <div className="form-row">
-                  <span className="form-label">Movie Title</span>
-                  <input className="form-input add-input" type="text" placeholder="Movie Title" name="title" required />
-                </div>
-                
-                <div className="form-row">
-                  <span className="form-label">My Review</span>
-                  <textarea className="form-input add-input" placeholder="My Review" name="review" rows="3" required></textarea>
-                </div>
-
-                <div className="form-row">
-                  <span className="form-label">Poster URL</span>
-                  <input className="form-input add-input" type="url" placeholder="Image URL" name="image" required /> 
-                </div>
-
-                <div className="form-row">
-                  <span className="form-label">My Rating</span>
-                  <input type="radio" name="rating" value="1" /><span className="form-label_radio">⭐</span><br />
-                  <input type="radio" name="rating" value="2" /><span className="form-label_radio">⭐⭐</span><br />
-                  <input type="radio" name="rating" value="3" /><span className="form-label_radio">⭐⭐⭐</span><br /> 
-                  <input type="radio" name="rating" value="4" /><span className="form-label_radio">⭐⭐⭐⭐</span><br />
-                </div>
-
-                <div className="form-row">
-                  <input className="form-submit add-submit" type="submit" />
-                </div>
-              </form>
-            </div>
-          </div>
-        </div>
-    )
-  }
 });
 
 

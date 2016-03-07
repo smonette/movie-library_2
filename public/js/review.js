@@ -86,17 +86,17 @@ var MovieTile = React.createClass({
   render() {    
     var reviewText = null;
     if(this.state.showReview){
-      reviewText = <p className="review-text mar-y">My review: {this.props.review}</p>
+      reviewText = <p className="review-text mar-y">{this.props.review}</p>
     }
 
     return (
       <li className="review-tile mar-bottom">
-        <h2 onClick={this.handleTitleClick}>{this.props.title}</h2>
+        <h2 className="review-title" onClick={this.handleTitleClick}>{this.props.title}</h2>
           {reviewText}
           <div className="review-thumbnail mar-y"> 
             <img className="review-image" src={this.props.image} alt={this.props.title} />
           </div>
-        <p>Rating: {this.props.rating}⭐</p>
+        <p className="review-rating">My rating: {this.props.rating} stars.</p>
       </li>
     );
   },

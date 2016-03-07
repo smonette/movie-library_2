@@ -10,7 +10,10 @@
 }
 
 .review-title {
-  a:hover { color: $blue; }
+  &:hover { 
+    color: $blue; 
+    cursor: pointer;
+  }
 }
 .review-rating {
   border-top: 1px solid #eee;

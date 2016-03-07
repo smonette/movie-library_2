@@ -31,7 +31,7 @@ app.post('/rest-api/movies', function(req,res){
   );
 })
 
-// Show all movies in JSON (accessed at http://localhost:4000/rest-api/movies)
+// Show all movies in JSON (accessed at /rest-api/movies)
 app.get('/rest-api/movies', function(req, res) {
   db.movie.findAll()
   .then( function(movies){
@@ -47,23 +47,9 @@ app.get('/rest-api/movies/:movie_id', function(req, res) {
   })
 });
 
-
-
-
-var getMovies = function(requestUrl, callback) {
-  var allMovies;
-  request(requestUrl, function(error, response, body){
-    if (!error && response.statusCode == 200) {
-      allMovies = JSON.parse(body).movies;
-      callback(allMovies);
-    }
-  });
-}
-
 // BUILD THE VIEWS
 app.get('/', function(req,res){
   res.render("index");
-
 }); 
 
 

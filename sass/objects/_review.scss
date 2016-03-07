@@ -37,30 +37,3 @@
 .review-rating {
   @extend .type-lg;
 }
-
-
-// Add review
-.add-review-tile {
-  padding: $space;
-  border: $border;
-  background: darken($light, 5%);
-  border-radius: $border-radius;
-  max-width: 400px;
-  margin-right: auto;
-  margin-left: auto;
-
-  &:hover {
-    background: $blue;
-    color: $light;
-    cursor: pointer;
-  }
-}
-
-.add-review_icon {
-  font-size: 100px;
-  font-weight: bold;
-}
-.add-review_cta {
-  font-size: 35px;
-  text-transform: uppercase;
-}

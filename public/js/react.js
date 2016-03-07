@@ -37,19 +37,19 @@ var MoviesGrid = React.createClass({
         </div>
         <div className="row">
           <ul className="review-grid"> 
-              { movies.map(function(movie){
-                  return ( 
-                    <li className="review-tile mar-bottom" key={movie.id}>
-                      <h2><a href="#" className="review-target">{movie.title}</a></h2>
-                      <p className="review-text mar-y">My review: {movie.review}</p>
-                        <div className="review-thumbnail mar-y"> 
-                          <img className="review-image" src={movie.image} alt={movie.title} />
-                        </div>
-                      <p>Rating: {movie.rating}⭐</p>
-                    </li>
-                  )
-              }) }
-              <MovieAddItem />
+            { movies.map(function(movie){
+              return ( 
+                <li className="review-tile mar-bottom" key={movie.id}>
+                  <h2><a href="#" className="review-target">{movie.title}</a></h2>
+                  <p className="review-text mar-y">My review: {movie.review}</p>
+                    <div className="review-thumbnail mar-y"> 
+                      <img className="review-image" src={movie.image} alt={movie.title} />
+                    </div>
+                  <p>Rating: {movie.rating}⭐</p>
+                </li>
+              )
+            }) }
+            <MovieAddItem />
           </ul>
         </div>
       </main>

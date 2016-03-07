@@ -39,13 +39,13 @@ var MoviesGrid = React.createClass({
           <ul className="review-grid"> 
               { movies.map(function(movie){
                   return ( 
-                    <li className="review-tile mar-bottom">
+                    <li className="review-tile mar-bottom" key={movie.id}>
                       <h2><a href="#" className="review-target">{movie.title}</a></h2>
                       <p className="review-text mar-y">My review: {movie.review}</p>
-                      <div className="review-thumbnail mar-y"> 
-                        <img className="review-image" src={movie.image} alt={movie.title} />
-                      </div>
-                      <p>My rating is: {movie.rating}</p>
+                        <div className="review-thumbnail mar-y"> 
+                          <img className="review-image" src={movie.image} alt={movie.title} />
+                        </div>
+                      <p>Rating: {movie.rating}⭐</p>
                     </li>
                   )
               }) }
@@ -56,15 +56,24 @@ var MoviesGrid = React.createClass({
     )}
 });
 
-
 var MovieAddItem = React.createClass({
-  render: function() {
-    return(
+
+  getInitialState: function(){
+    return { active: false };
+  },
+  handleClick: function() {
+    console.log('clicked!');
+    this.setState( {active: true} );
+    document.getElementById('overlay').className('active');
+  },
+  render() {
+    return (
       <li className="add-review-tile mar-bottom type-centered">
-        <h2><a href="#" id="overlay-init">Add Review!</a></h2>
+        <h2><a>Add Review!</a></h2>
       </li>
-  )}
-}); // end MovieAddItem
+    );
+  }
+});
 
 
 

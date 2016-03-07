@@ -1,5 +1,5 @@
 // CALL API FOR MOVIES
-var apiURL = "http://localhost:4000/rest-api/movies/";
+var apiURL = "/rest-api/movies/";
 
 var movieRequest = new XMLHttpRequest();
 movieRequest.open("GET", apiURL, false);
